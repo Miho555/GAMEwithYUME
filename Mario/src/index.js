@@ -33,6 +33,7 @@ var isGameOver = false;
 var RightWalk = false;
 // 右向きか否かのフラグ値
 var LeftWalk = false;
+var Before = 1;
 
 // ブロック要素の定義
 var blocks = [
@@ -71,6 +72,7 @@ function update() {
       updatedX = 0;
       updatedY = 268;
       vy = 0;
+      Before = 1;
     }
   }else{
       // 入力値の確認と反映
@@ -79,6 +81,7 @@ function update() {
       updatedX = x - 2;
       LeftWalk = true;
       RightWalk = false;
+      Before = 2;
     }else{
       LeftWalk = false;
     }
@@ -92,6 +95,7 @@ function update() {
       updatedX = x + 2;
       RightWalk = true;
       LeftWalk = false;
+      Before = 1;
     }else{
       RightWalk = false;
     }
@@ -147,8 +151,11 @@ function update() {
   } else if (RightWalk){
     image.src = imageR[num];
   } else {
-    image.src = imageR[0];
-    //image.src = imageL[0];
+    if (Before == 1){
+      image.src = imageR[0];
+    }else {
+      image.src = imageL[0];
+    }
   }
   ctx.drawImage(image, x, y, 64, 64);
 
