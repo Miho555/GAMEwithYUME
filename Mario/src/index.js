@@ -77,6 +77,7 @@ function update() {
     }
   }else{
       // 入力値の確認と反映
+
     if (input_key_buffer[37]) {
       // 左が押されていればx座標を1減らす
       updatedX = x - 2;
@@ -86,11 +87,7 @@ function update() {
     }else{
       LeftWalk = false;
     }
-    if (input_key_buffer[38]) {
-      // 上が押されていれば、上向きの初期速度を与え、ジャンプ中のフラグを立てる
-      vy = -7;
-      isJump = true;
-    }
+    
     if (input_key_buffer[39]) {
       // 右が押されていればx座標を1増やす
       updatedX = x + 2;
@@ -100,6 +97,14 @@ function update() {
     }else{
       RightWalk = false;
     }
+
+    if (input_key_buffer[38]) {
+      // 上が押されていれば、上向きの初期速度を与え、ジャンプ中のフラグを立てる
+      vy = -7;
+      LeftWalk = false;
+      RightWalk = false;
+      isJump = true;
+    } 
   
     // ジャンプ中である場合のみ落下するように調整する
     if (isJump) {
