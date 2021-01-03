@@ -33,7 +33,8 @@ var isGameOver = false;
 var RightWalk = false;
 // 右向きか否かのフラグ値
 var LeftWalk = false;
-var Before = 1;
+// 以前進んでいた方向：0＝右，1＝左
+var Before = 0;
 
 // ブロック要素の定義
 var blocks = [
@@ -72,7 +73,7 @@ function update() {
       updatedX = 0;
       updatedY = 268;
       vy = 0;
-      Before = 1;
+      Before = 0;
     }
   }else{
       // 入力値の確認と反映
@@ -81,7 +82,7 @@ function update() {
       updatedX = x - 2;
       LeftWalk = true;
       RightWalk = false;
-      Before = 2;
+      Before = 1;
     }else{
       LeftWalk = false;
     }
@@ -95,7 +96,7 @@ function update() {
       updatedX = x + 2;
       RightWalk = true;
       LeftWalk = false;
-      Before = 1;
+      Before = 0;
     }else{
       RightWalk = false;
     }
@@ -140,18 +141,22 @@ function update() {
   // 主人公の画像を表示
   var image = new Image();
   //image.src = "../images/character-01/image2.png";
-  var imageR = new Array("../images/character-01/image1R.png", "../images/character-01/image2R.png");
-  var imageL = new Array("../images/character-01/image1L.png", "../images/character-01/image2L.png");
+  var imageR = new Array("../images/character-01/image1R.png", "../images/character-01/image2R.png","../images/character-01/image1R.png","../images/character-01/image3R.png");
+  var imageL = new Array("../images/character-01/image1L.png", "../images/character-01/image2L.png","../images/character-01/image1L.png","../images/character-01/image3L.png");
+  var imageJ = new Array("../images/character-01/miku_jpR.png", "../images/character-01/miku_jpL.png");
+//<audio controls autoplay　src="../music/music1.mp3" controls autoplay></audio >
 
   if (isGameOver) {
     // ゲームオーバーの場合にはゲームオーバーの画像が表示する
-    image.src = "../images/character-01/game-over.png";
+    image.src = "../images/character-01/miku_gameover.png";
   } else if (LeftWalk){
     image.src = imageL[num];
   } else if (RightWalk){
     image.src = imageR[num];
+  } else if (isJump){
+    image.src = imageJ[Before];
   } else {
-    if (Before == 1){
+    if (Before == 0){
       image.src = imageR[0];
     }else {
       image.src = imageL[0];
@@ -191,10 +196,8 @@ function getBlockTargrtIsOn(x, y, updatedX, updatedY) {
 }
 
 function slideshow_timer(){
-    if (num == 0){
-        num = 1;
-    } 
-    else {
-      num = 0;
+    num = num + 1;
+    if (num > 3){
+        num = 0;
     }
 }
