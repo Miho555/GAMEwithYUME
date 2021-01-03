@@ -23,6 +23,9 @@ var x = 0;
 var y = 268;
 var num = 0;
 
+// Audioオブジェクトを作成
+let audioElm = new Audio('../music/music1.mp3');
+
 // 上下方向の速度
 var vy = 0;
 // ジャンプしたか否かのフラグ値
@@ -49,12 +52,17 @@ setInterval(slideshow_timer,300);
 
 // 画面を更新する関数を定義 (繰り返しここの処理が実行される)
 function update() {
+  // 音楽の再生
+  //audioElm.play();
+
   // 画面全体をクリア
   ctx.clearRect(0, 0, 640, 480);
 
   // 更新後の座標
   var updatedX = x;
   var updatedY = y;
+
+  
 
   if (isGameOver) {
     // 上下方向は速度分をたす
@@ -90,6 +98,8 @@ function update() {
       // 上が押されていれば、上向きの初期速度を与え、ジャンプ中のフラグを立てる
       vy = -7;
       isJump = true;
+      RightWalk = false;
+      LeftWalk = false;
     }
     if (input_key_buffer[39]) {
       // 右が押されていればx座標を1増やす
