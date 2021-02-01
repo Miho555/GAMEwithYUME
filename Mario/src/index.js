@@ -206,3 +206,6 @@ function slideshow_timer(){
         num = 0;
     }
 }
+document.getElementById("audioPlay").onclick = function(){
+  document.getElementById("audioElement").play();
+};

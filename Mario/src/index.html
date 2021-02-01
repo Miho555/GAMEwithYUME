@@ -4,10 +4,6 @@
     <meta charset="utf-8" />
     <title>スーパーミク</title>
     <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
       canvas {
         background: #eee;
         display: block;
@@ -16,9 +12,10 @@
     </style>
   </head>
   <body>
+    <audio id="audioElement" src="../music/music1.mp3"></audio>
+<button id="audioPlay">aa</button>
     <canvas id="maincanvas" width="640" height="480"></canvas>
-    <script src="./index.js"></script>
-    <iframe src="./music/music1.mp3" allow="autoplay" style="display:none" id="iframeAudio">
-    </iframe> 
+    <script src="./index.js">
+ </script>
   </body>
 </html>
