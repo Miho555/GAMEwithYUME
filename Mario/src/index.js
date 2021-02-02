@@ -22,6 +22,7 @@ const ctx = canvas.getContext("2d");
 var x = 0;
 var y = 268;
 var num = 0;
+var flag_over = 0;
 
 // 上下方向の速度
 var vy = 0;
@@ -49,6 +50,14 @@ setInterval(slideshow_timer,300);
 
 // 画面を更新する関数を定義 (繰り返しここの処理が実行される)
 function update() {
+  if(flag_over == 0){
+    game_play();
+  }else if(flag_over == 1){
+    gop_start();
+  }
+}
+
+function game_play(){
   // 画面全体をクリア
   ctx.clearRect(0, 0, 640, 480);
 
@@ -65,7 +74,8 @@ function update() {
 
     if (y > 500) {
       // ゲームオーバーのキャラが更に下に落ちてきた時にダイアログを表示し、各種変数を初期化する
-      alert("GAME OVER");
+      //alert("GAME OVER");
+      flag_over = 1;
       isGameOver = false;
       isJump = false;
       RightWalk = false;
@@ -178,6 +188,7 @@ function update() {
 
   // 再描画
   window.requestAnimationFrame(update);
+
 }
 
 // 変更前後のxy座標を受け取って、ブロック上に存在していればそのブロックの情報を、存在していなければnullを返す
@@ -205,4 +216,26 @@ function slideshow_timer(){
     if (num > 3){
         num = 0;
     }
+}
+
+
+function gop_start()
+{
+	// キャンバスのクリア
+	ctx.clearRect(0, 0, 640, 480);
+	// タイトルの表示
+	ctx.font = "50px 'ＭＳ ゴシック'";
+	ctx.textBaseline = "top";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "rgb(0, 0, 255)";
+  //ctx.fillText("Game Over!", mp.canvas.width/2, mp.canvas.height/2);
+  ctx.fillText("Game Over!", 350, 100);
+
+  if (input_key_buffer[13]) {
+    // 上が押されていれば、上向きの初期速度を与え、ジャンプ中のフラグを立てる
+    flag_over = 0;
+    alert("RE START");
+  }
+  
+  window.requestAnimationFrame(update);
 }
