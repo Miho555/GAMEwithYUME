@@ -14,6 +14,11 @@ function handleKeyup(e) {
   input_key_buffer[e.keyCode] = false;
 }
 
+// 音楽再生
+document.getElementById("audioPlay").onclick = function(){
+  document.getElementById("audioElement").play();
+};
+
 // canvas要素の取得
 const canvas = document.getElementById("maincanvas");
 const ctx = canvas.getContext("2d");
