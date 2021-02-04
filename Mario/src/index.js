@@ -12,6 +12,7 @@ window.addEventListener("keyup", handleKeyup);
 function handleKeyup(e) {
   e.preventDefault();
   input_key_buffer[e.keyCode] = false;
+  console.log("hello");
 }
 
 // 音楽再生
@@ -55,10 +56,10 @@ setInterval(slideshow_timer,300);
 
 // 画面を更新する関数を定義 (繰り返しここの処理が実行される)
 function update() {
-  if(flag_over == 0){
-    game_play();
-  }else if(flag_over == 1){
+  if(flag_over == 1){
     gop_start();
+  }else{
+    game_play();
   }
 }
 
@@ -79,7 +80,6 @@ function game_play(){
 
     if (y > 500) {
       // ゲームオーバーのキャラが更に下に落ちてきた時にダイアログを表示し、各種変数を初期化する
-      //alert("GAME OVER");
       flag_over = 1;
       isGameOver = false;
       isJump = false;
@@ -233,14 +233,13 @@ function gop_start()
 	ctx.textBaseline = "top";
 	ctx.textAlign = "center";
 	ctx.fillStyle = "rgb(0, 0, 255)";
-  //ctx.fillText("Game Over!", mp.canvas.width/2, mp.canvas.height/2);
   ctx.fillText("Game Over!", 350, 100);
 
   if (input_key_buffer[13]) {
-    // 上が押されていれば、上向きの初期速度を与え、ジャンプ中のフラグを立てる
     flag_over = 0;
-    alert("RE START");
+    //alert("RE START");
   }
   
+
   window.requestAnimationFrame(update);
 }
