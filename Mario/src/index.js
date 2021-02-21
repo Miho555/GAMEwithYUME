@@ -12,7 +12,6 @@ window.addEventListener("keyup", handleKeyup);
 function handleKeyup(e) {
   e.preventDefault();
   input_key_buffer[e.keyCode] = false;
-  console.log("hello");
 }
 
 // 音楽再生
@@ -113,7 +112,7 @@ function game_play(){
       RightWalk = false;
     }
 
-    if (input_key_buffer[38]) {
+    if (input_key_buffer[38] && y>0) {
       // 上が押されていれば、上向きの初期速度を与え、ジャンプ中のフラグを立てる
       vy = -7;
       LeftWalk = false;
@@ -125,6 +124,10 @@ function game_play(){
     if (isJump) {
       // 上下方向は速度分をたす
       updatedY = y + vy;
+      if (updatedY < 0){
+        updatedY = 0;
+        console.log(y,updatedY)
+      }
 
       // 落下速度はだんだん大きくなる
       vy = vy + 0.5;
@@ -239,7 +242,5 @@ function gop_start()
     flag_over = 0;
     //alert("RE START");
   }
-  
-
   window.requestAnimationFrame(update);
 }
